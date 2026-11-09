@@ -1,11 +1,10 @@
-
 import type { Request, Response, NextFunction } from "express";
 
 import { extractWebsiteSchema } from "../validation/summarizer.validation.js";
-import { extractWebsite } from "../service/summarizer.service.js";
+import { summarizeWebsite } from "../service/summarizer.service.js";
 import { AppError } from "../../../common/errors/app-error.js";
 
-export const extractWebsiteController = async (
+export const summarizeWebsiteController = async (
     req: Request,
     res: Response,
     next: NextFunction
@@ -23,12 +22,12 @@ export const extractWebsiteController = async (
 
         const { url } = validationResult.data;
 
-        const websiteContent = await extractWebsite(url);
+        const result = await summarizeWebsite(url);
 
         res.status(200).json({
             success: true,
-            message: "Website content extracted successfully.",
-            data: websiteContent,
+            message: "Website summarized successfully.",
+            data: result,
         });
     } catch (error) {
         next(error);

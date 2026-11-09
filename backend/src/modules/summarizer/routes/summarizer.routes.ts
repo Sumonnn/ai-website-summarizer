@@ -1,9 +1,9 @@
-
 import { Router } from "express";
-import { extractWebsiteController } from "../controller/summarizer.controller.js";
+
+import { summarizeWebsiteController } from "../controller/summarizer.controller.js";
 
 const router = Router();
 
-router.post("/extract", extractWebsiteController);
+router.post("/summarize", summarizeWebsiteController);
 
 export default router;
